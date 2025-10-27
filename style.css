@@ -1,0 +1,899 @@
+/*
+ * Pełny i nowoczesny plik CSS dla strony fotografa
+ * Wprowadzono poprawki na jakość zdjęć i slider opinii
+ */
+
+/* =======================================
+   PALETA & ZMIENNE
+   ======================================= */
+:root {
+    /* Kolory */
+    --primary-color: #2B2B2B; 
+    --background-color: #F6F6F6;
+    --accent-color: #CBB994;
+    --accent-hover: #BCA77C;
+    --accent-hover_text: #ffffff;
+    --neutral-color: #D9D9D9;
+    --exceptional: #daf1b5;
+    --text-color: #1C1C1C;
+    --light-text: #F6F6F6;
+    
+    /* Fonty (z Google Fonts) */
+    --font-heading: 'Permanent Marker', cursive;
+    --font-body: 'Atma', cursive;
+
+    /* Nowoczesne cienie i zaokrąglenia */
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
+    --border-radius-card: 8px; 
+    --border-radius-btn: 4px; 
+}
+
+/* =======================================
+   GLOBALNE STYLE & TYPOGRAFIA
+   ======================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Typografia */
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+    text-shadow: 6px 2px 0.5px rgb(219, 219, 219);
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 1.75rem; }
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--accent-hover_text);
+}
+
+p{
+    padding: 15px 0px;
+}
+header{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#icons{
+    padding-top: 10px;
+}
+.section-subtitle {
+    font-size: 1.15rem;
+    color: var(--primary-color);
+    margin-bottom: 2em;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 300;
+}
+
+.cta-button{
+    margin-top: 5px !important;
+}
+/* Układ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 100px 0;
+    text-align: center;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: var(--neutral-color);
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* CTA Button */
+.cta-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 14px 35px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    border-radius: var(--border-radius-btn);
+    box-shadow: 0 3px 10px rgba(203, 185, 148, 0.4);
+}
+
+.cta-button:hover {
+    background-color: var(--accent-hover);
+    box-shadow: 0 6px 15px rgba(203, 185, 148, 0.6);
+}
+
+/* Header & Nawigacja */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Zmieniamy początkowe tło, by łatwiej było przejść do przezroczystego */
+    background-color: var(--background-color); /* Pełne tło na początku */
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: none; /* Początkowo bez cienia, dodamy go przy przewinięciu */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Płynne przejście */
+}
+
+/* NOWA KLASA: Nagłówek po przewinięciu */
+header.scrolled {
+    /* Ustawienie tła na półprzezroczyste */
+    background-color: rgba(246, 246, 246, 0.993); /* Opcja 1: Lekka przeźroczystość (90% krycia) */
+    /* LUB: Użycie zmiennej koloru tła, jeśli jest jaśniejszy */
+    /* background-color: rgba(var(--background-color-rgb), 0.9); */ 
+    
+    /* Dodanie delikatnego cienia dla kontrastu z treścią */
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
+}
+
+.logo a {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--primary-color);
+    margin-left: 30px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hero {
+    height: 100vh;
+    min-height: 600px;
+    /* NAPRAWIONE: Używamy 1920/1080 i '&' do łączenia parametrów */
+    background: url('johannes-plenio-hvrpOmuMrAI-unsplash.jpg') center center / cover no-repeat; /* Dodano brakujące parametry */
+    
+    /* 🌟 KLUCZOWY FRAGMENT DLA EFEKTU PARALAKSY 🌟 */
+    background-attachment: fixed; 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--light-text);
+    position: relative;
+    text-align: center;
+    padding-top: 80px;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35); /* Ciemniejsza nakładka */
+    z-index: 1;
+}
+
+.hero-content {
+    z-index: 2;
+}
+
+.hero-content h1 {
+    color: var(--light-text);
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    font-weight: 300;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* =======================================
+   2. O MNIE (ABOUT)
+   ======================================= */
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    text-align: left;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-image-container {
+    flex: 1;
+}
+
+/* WAŻNE: Obraz 100% z object-fit: cover */
+.about-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+    border-radius: var(--border-radius-card); 
+    box-shadow: var(--shadow-medium); 
+}
+
+
+/* =======================================
+   3. PORTFOLIO
+   ======================================= */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.gallery-item {
+    overflow: hidden;
+    position: relative;
+    display: block;
+    border-radius: var(--border-radius-card); 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    aspect-ratio: 1/1; 
+}
+
+/* WAŻNE: Obrazy w galerii 100% z object-fit: cover */
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08); 
+    opacity: 0.9;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+.lightbox-content {
+    margin: auto;
+    margin-top: 70px;
+    display: block;
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: var(--border-radius-card);
+}
+
+#lightbox-caption {
+    margin: 15px auto;
+    display: block;
+    width: 80%;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    font-size: 1.1rem;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: var(--accent-color);
+}
+
+
+/* =======================================
+   4. OFERTA (PRICING)
+   ======================================= */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.pricing-card {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--neutral-color);
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.accent-card {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    box-shadow: 0 10px 30px rgba(203, 185, 148, 0.4);
+}
+
+.accent-card h3, .accent-card .price {
+    color: var(--primary-color);
+}
+
+.pricing-card .price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin: 15px 0;
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 25px 0 35px 0;
+    text-align: left;
+}
+
+.pricing-card ul li {
+    padding: 8px 0;
+    font-size: 1.05rem;
+}
+
+.pricing-card ul li i {
+    color: var(--accent-color);
+    margin-right: 10px;
+    font-size: 0.9rem;
+}
+
+.accent-card ul li i {
+    color: var(--primary-color);
+}
+
+.pricing-note {
+    margin-top: 40px;
+    font-style: italic;
+    color: var(--text-color);
+}
+
+
+/* =======================================
+   5. OPINIE (REVIEWS) - STYLE SLIDERA
+   ======================================= */
+.reviews-section {
+    background: url(luca-bravo-ii5JY_46xH0-unsplash.jpg);
+    padding: 120px 0;
+}
+
+.slider-container {
+    position: relative;
+    overflow: hidden; 
+    max-width: 800px; 
+    margin: 60px auto 0;
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--shadow-medium);
+}
+
+.review-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out; 
+    width: 100%;
+}
+
+.review-card {
+    flex: 0 0 100%; 
+    background-color: var(--background-color);
+    padding: 40px;
+    border-left: 5px solid var(--accent-color);
+    text-align: left;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.review-card .quote {
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: 1.15rem;
+    color: var(--text-color);
+}
+
+.review-card .client-name {
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Kontrolki slidera */
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(43, 43, 43, 0.7);
+    color: var(--light-text);
+    border: none;
+    padding: 15px 10px;
+    cursor: pointer;
+    z-index: 50;
+    transition: background 0.3s, color 0.3s;
+    font-size: 1.2rem;
+}
+
+.slider-button:hover {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.slider-button.prev {
+    left: 0;
+    border-radius: 0 var(--border-radius-btn) var(--border-radius-btn) 0;
+}
+
+.slider-button.next {
+    right: 0;
+    border-radius: var(--border-radius-btn) 0 0 var(--border-radius-btn);
+}
+
+/* =======================================
+   6. KONTAKT
+   ======================================= */
+.contact-grid {
+    display: flex;
+    gap: 50px;
+    max-width: 900px;
+    margin: 50px auto 0;
+    text-align: left;
+}
+
+.contact-form-container {
+    flex: 2;
+}
+
+.contact-info {
+    flex: 1;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--shadow-light);
+    border-left: 3px solid var(--accent-color);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid var(--neutral-color);
+    border-radius: var(--border-radius-btn);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+.contact-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    margin-bottom: 15px;
+}
+
+.contact-info i {
+    color: var(--accent-color);
+    margin-right: 10px;
+}
+
+.social-links {
+    margin-top: 30px;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: var(--primary-color);
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+
+/* =======================================
+   7. STOPKA (FOOTER)
+   ======================================= */
+footer {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: 40px 0;
+    text-align: center;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .social-links a {
+    color: var(--light-text);
+}
+
+footer .social-links a:hover {
+    color: var(--accent-color);
+}
+
+/* =======================================
+   RESPONSYWNOŚĆ (Media Queries)
+   ======================================= */
+
+/* Tablet (max-width: 992px) */
+@media (max-width: 992px) {
+    /* ... (istniejący kod 992px) ... */
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-image-container {
+        max-width: 60%;
+        margin-top: 30px;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .contact-grid {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .contact-info {
+        text-align: center;
+        margin-top: 30px;
+        border-left: none;
+        border-top: 3px solid var(--accent-color);
+    }
+    
+    .contact-info p {
+        display: inline-block;
+        margin: 10px 15px;
+    }
+}
+
+/* Mobilne (max-width: 768px) */
+@media (max-width: 768px) {
+    /* ... (istniejący kod 768px) ... */
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    .section { padding: 60px 0; }
+    
+    header {
+        padding: 15px 20px;
+    }
+    
+    #main-nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 80px; 
+        left: 0;
+        width: 100%;
+        background-color: var(--background-color);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+    }
+    
+    #main-nav.active {
+        display: flex;
+    }
+
+    nav a {
+        margin: 10px 0;
+        padding: 10px 20px;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+
+    .about-image-container {
+        max-width: 90%;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+    
+    .slider-button {
+        padding: 10px 5px;
+    }
+
+    footer .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+
+/* Mobilne (bardzo małe ekrany, np. małe telefony - max-width: 480px) */
+@media (max-width: 480px) {
+    /* 🌟 MNIEJSZE CZCIONKI 🌟 */
+    h1 { 
+        font-size: 1.5rem; 
+    }
+    h2 { 
+        font-size: 1.6rem; /* Jeszcze mniejsza czcionka */
+    }
+    h3 { 
+        font-size: 1.4rem; /* Jeszcze mniejsza czcionka */
+    }
+    
+    /* 🌟 WIĘKSZE PADDINGI (wewnętrzne odstępy) 🌟 */
+    p {
+        font-size: 0.9rem; /* Najmniejszy rozmiar akapitu */
+        padding: 15px 5px; /* Zwiększenie górnego/dolnego paddingu i dodanie małego poziomego */
+    }
+    
+    /* Zmniejszenie rozmiaru tekstu w sekcji HERO */
+    .hero-content h1 {
+        font-size: 2rem; 
+    }
+
+    .hero-content p {
+        font-size: 1rem; 
+    }
+
+    /* Dopasowanie paddingu sekcji dla większej przestrzeni pionowej */
+    .section {
+        padding: 40px 0; /* Zmniejszony padding ogólny */
+    }
+}
+
+/*Kalendarz*/
+.open-modal-btn {
+    background: var(--accent-color);
+    color: var(--accent-hover_text);
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--border-radius-btn);
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.open-modal-btn:hover {
+    background: var(--accent-hover);
+}
+
+/* --- MODAL --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: #fff;
+    border-radius: var(--border-radius-card);
+    padding: 20px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-medium);
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+/* Zamknięcie */
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+/* --- KALENDARZ --- */
+.calendar-section {
+    flex: 1;
+    min-width: 340px;
+}
+
+.calendar-section h2 {
+    font-family: var(--font-heading);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.calendar-header button {
+    background: var(--accent-color);
+    border: none;
+    color: var(--accent-hover_text);
+    font-size: 18px;
+    padding: 4px 10px;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.2s;
+}
+.calendar-header button:hover {
+    background: var(--accent-hover);
+}
+.month-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+.day-label {
+    text-align: center;
+    font-weight: bold;
+}
+.day input[type="radio"] {
+    display: none;
+}
+.day label {
+    display: block;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    background: var(--neutral-color);
+    transition: 0.2s;
+}
+.day input[type="radio"]:checked + label {
+    background: var(--accent-color);
+    color: var(--accent-hover_text);
+    font-weight: bold;
+}
+.day label:hover {
+    background: var(--accent-hover);
+    color: var(--accent-hover_text);
+}
+
+/* --- FORMULARZ KONTAKTOWY --- */
+.contact-form-container {
+    flex: 1;
+    min-width: 340px;
+}
+
+.contact-form-container h2 {
+    font-family: var(--font-heading);
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border: 1px solid var(--neutral-color);
+    border-radius: var(--border-radius-btn);
+    font-size: 15px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(203,185,148,0.3);
+}
+
+.cta-button {
+    background: var(--accent-color);
+    color: var(--accent-hover_text);
+    border: none;
+    padding: 15px;
+    border-radius: var(--border-radius-btn);
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.cta-button:hover {
+    background: var(--accent-hover);
+}
